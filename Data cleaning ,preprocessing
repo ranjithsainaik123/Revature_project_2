@@ -1,0 +1,29 @@
+Step-1
+Before import the data in biqquery 
+In excel you have change the data in discount_amount column =price*discount_perect/100 for both sales_data_2020 and also 2021
+
+Step-2
+  import the lastest_dataset sales_data_2020-21 in Bigquery d
+step-3
+create a two dumpy tables 
+  
+create table project_2.sales2020 as (select qty_ordered * price as values , (qty_ordered * price - discount_amount) as total_price  , order_id ,order_date, status,item_id, sku, qty_ordered,
+price, value, discount_amount, total, category, payment_method,bi_st,cust_id, year,month, ref_num, name_prefix, first_name,Middle_Initial , gender,age,full_name, e_mail,
+customer_since, ssn,phone_no__, place_name, county,city, state, zip, region, user_name, discount_percent
+from `midyear-nebula-413114.project_2.Sales_2020` );
+
+create table project_2.Sales2021 as (select qty_ordered * price as values , (qty_ordered * price - discount_amount) as total_price  , order_id ,order_date, status,item_id, sku, qty_ordered,
+price, value, discount_amount, total, category, payment_method,bi_st,cust_id, year,month, ref_num, name_prefix, first_name,Middle_Initial , gender,age,full_name, e_mail,
+customer_since, ssn,phone_no__, place_name, county,city, state, zip, region, user_name, discount_percent
+from `midyear-nebula-413114.project_2.sales_2021`);
+
+step-4
+after creating two dumpy tables we have to merge both datasets name "project_2.sales_data_2020_21"
+create table project_2.sales_data_2020_21 as(
+  select * from `midyear-nebula-413114.project_2.sales2020`
+  union all
+  select * from `midyear-nebula-413114.project_2.Sales2021`
+)
+
+
+
