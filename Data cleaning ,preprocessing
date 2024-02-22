@@ -1,3 +1,16 @@
+
+* We adjusted the values in the "month" column to just contain the month 3 letter abbreviations. The year is represented in its own column. 
+* We renamed "price" to "price_per_unit".
+* We renamed "value" to "subtotal"
+* We renamed "bi_st" to "billing_status"
+* We removed Middle_Initial, Place_Name, full_name, and ref_num --> We saw no value in these columns
+* We re-calculated "subtotal" (previously "value") as (qty_ordered * price_per_unit) <--- "price"/"price_per_unit" given known good value
+* We rounded the Discount_Percent column to 2 decimal places
+* We re-calculated discount_amount as (subtotal * (Discount_Percentage/100))
+* We rounded discount_amount to 2 decimal places
+* We recalculated the "total" to reflect instruction to not apply discount if billing_status is "Gross" but still include the value of the discount 
+not applied as the value of the discount_amount column as follows:
+      
 Step-1
 Before import the data in biqquery 
 In excel you have change the data in discount_amount column =price*discount_perect/100 for both sales_data_2020 and also 2021
